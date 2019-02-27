@@ -1,0 +1,2 @@
+mkdir -p mv %{buildroot}/usr/bin
+mv %{buildroot}/usr/sbin/nvmetcli %{buildroot}/usr/bin/nvmetcli
