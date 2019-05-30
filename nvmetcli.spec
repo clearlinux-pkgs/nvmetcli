@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x0F9E536552045183 (hch@lst.de)
 #
 Name     : nvmetcli
-Version  : 0.6
-Release  : 4
-URL      : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.6.tar.gz
-Source0  : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.6.tar.gz
-Source99 : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.6.tar.gz.asc
+Version  : 0.7
+Release  : 5
+URL      : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz
+Source0  : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz
+Source99 : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz.asc
 Summary  : Command line interface for the kernel NVMe nvmet
 Group    : Development/Tools
 License  : Apache-2.0
@@ -60,15 +60,21 @@ python3 components for the nvmetcli package.
 
 
 %prep
-%setup -q -n nvmetcli-0.6
+%setup -q -n nvmetcli-0.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551226012
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1559236849
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
