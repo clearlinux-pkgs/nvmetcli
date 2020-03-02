@@ -6,10 +6,10 @@
 #
 Name     : nvmetcli
 Version  : 0.7
-Release  : 8
+Release  : 9
 URL      : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz
 Source0  : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz
-Source99 : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz.asc
+Source1  : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz.asc
 Summary  : Command line interface for the kernel NVMe nvmet
 Group    : Development/Tools
 License  : Apache-2.0
@@ -61,13 +61,16 @@ python3 components for the nvmetcli package.
 
 %prep
 %setup -q -n nvmetcli-0.7
+cd %{_builddir}/nvmetcli-0.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1559236849
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1583188835
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
@@ -82,8 +85,8 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/nvmetcli
-cp COPYING %{buildroot}/usr/share/package-licenses/nvmetcli/COPYING
-cp debian/copyright %{buildroot}/usr/share/package-licenses/nvmetcli/debian_copyright
+cp %{_builddir}/nvmetcli-0.7/COPYING %{buildroot}/usr/share/package-licenses/nvmetcli/294b43b2cec9919063be1a3b49e8722648424779
+cp %{_builddir}/nvmetcli-0.7/debian/copyright %{buildroot}/usr/share/package-licenses/nvmetcli/cf069ec13c727e31e33f96a0c4394ab1d3f36f38
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -102,8 +105,8 @@ mv %{buildroot}/usr/sbin/nvmetcli %{buildroot}/usr/bin/nvmetcli
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/nvmetcli/COPYING
-/usr/share/package-licenses/nvmetcli/debian_copyright
+/usr/share/package-licenses/nvmetcli/294b43b2cec9919063be1a3b49e8722648424779
+/usr/share/package-licenses/nvmetcli/cf069ec13c727e31e33f96a0c4394ab1d3f36f38
 
 %files python
 %defattr(-,root,root,-)
