@@ -6,7 +6,7 @@
 #
 Name     : nvmetcli
 Version  : 0.7
-Release  : 9
+Release  : 10
 URL      : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz
 Source0  : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz
 Source1  : ftp://ftp.infradead.org/pub/nvmetcli/nvmetcli-0.7.tar.gz.asc
